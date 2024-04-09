@@ -405,7 +405,9 @@ function getCommitInfo(document: vscode.TextDocument, repo: Repository, file: Fi
   let beforePath = path, afterPath = path;
   const names = file.filenames.get(ref);
   if (names) {
-    const prefix = repo.gitRepo.rootUri.fsPath + pathlib.sep;
+    // TODO: https://github.com/mk12/vscode-better-git-line-blame/issues/2
+    // Trying path + "/" instead of fsPath + pathlib.sep.
+    const prefix = repo.gitRepo.rootUri.path + "/";
     beforePath = prefix + names.previous;
     afterPath = prefix + names.filename;
   }
